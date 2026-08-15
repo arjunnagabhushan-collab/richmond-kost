@@ -594,6 +594,15 @@
       }
     }
 
+
+    .room-title-row{display:flex;align-items:center;gap:14px}
+    .room-switch{width:42px;height:42px;flex:0 0 42px;border:1px solid #cfc6b8;background:transparent;color:var(--navy);cursor:pointer;font-size:20px;display:grid;place-items:center;transition:transform .2s ease,background .2s ease,color .2s ease}
+    .room-switch:hover{background:var(--navy);color:#fff}
+    .room-switch.prev:hover{transform:translateX(-2px)}
+    .room-switch.next:hover{transform:translateX(2px)}
+    .room-counter{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-top:10px}
+    @media(max-width:520px){.room-title-row{gap:9px}.room-switch{width:36px;height:36px;flex-basis:36px}.room-title-row h2{font-size:43px!important}}
+
     @media(max-width:800px) {
       .links a:not(.goldbtn) {
         display: none
@@ -696,8 +705,8 @@
   <header>
     <nav class="wrap">
       <a class="brand brand-block" href="#">
-        <img src="assets/logo-header.png" alt="Richmond Kost">
-        <span class="brand-title">RICHMOND KOST<small>Premium Kost &amp; Residence</small></span>
+        <img src="assets/logo-header.png" alt="Richmond Villa">
+        <span class="brand-title">RICHMOND VILLA<small>Premium Kost &amp; Residence</small></span>
       </a>
       <div class="links">
         <a href="#room" data-en="Room" data-id="Kamar">Kamar</a>
@@ -706,7 +715,7 @@
         <button class="lang" id="langToggle" aria-label="Switch language"><span id="langEN">EN</span><b>·</b><span
             id="langID">ID</span></button>
         <a class="goldbtn"
-          href="https://wa.me/6281319865515?text=Hi%2C%20I%20found%20Richmond%20Kost%20through%20your%20website.%20I%27d%20like%20to%20check%20room%20availability."
+          href="https://wa.me/6281319865515?text=Halo, saya mau tanya mengenai kost yang diiklankan di situs https://richmondkost.sunter.workers.dev"
           target="_blank" data-en="Check availability" data-id="Cek ketersediaan">Cek ketersediaan</a>
       </div>
     </nav>
@@ -719,8 +728,8 @@
           </div>
           <div class="property-name"
             style="font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--navy);margin-bottom:18px;font-weight:600;">
-            RICHMOND KOST</div>
-          <h1 data-en="A better place<br>to call home." data-id="Lebih dari sekadar hunian tempat<br>kost biasa, ini villa Anda.">Lebih dari sekadar hunian tempat<br>kost biasa, ini villa Anda.</h1>
+            RICHMOND VILLA</div>
+          <h1 data-en="More than just an ordinary boarding house, this is your villa." data-id="Lebih dari sekadar hunian<br>kost biasa, ini villa Anda.">Lebih dari sekadar hunian<br>kost biasa, ini villa Anda.</h1>
           <p data-en="Thoughtfully furnished private living for working professionals — comfortable, secure and quietly connected to everything you need."
             data-id="Hunian kost berfurnitur lengkap yang dirancang khusus untuk para profesional. Menawarkan kenyamanan, keamanan, serta kemudahan akses yang terhubung langsung ke setiap kebutuhan Anda.">
             Hunian kost berfurnitur lengkap yang dirancang khusus untuk para profesional. Menawarkan kenyamanan, keamanan, serta kemudahan akses yang terhubung langsung ke setiap kebutuhan Anda.</p>
@@ -746,19 +755,9 @@
     <section id="room">
       <div class="wrap room">
         <div class="room-photo reveal" aria-label="Single bedroom photo gallery">
-          <div class="slides">
-            <div class="slide active"
-              style="background-image:url('https://www.domainedeverchant.com/_novaimg/galleria/1581066.jpg')"></div>
-            <div class="slide"
-              style="background-image:url('https://images.prismic.io/travauxlib/aHo8wkMqNJQqIGXY_hemea_59171_intrieur_dun_htel_moderne_minimaliste_avec_des_co_a7687fa3-abfc-4cd3-ae90-8a3297a514b5_3.png?auto=format%2Ccompress')">
-            </div>
-            <div class="slide"
-              style="background-image:url('https://archify-images-prod.s3.ap-southeast-1.amazonaws.com/files/professional/projects/m/7tgj6xgjda.jpg')">
-            </div>
-          </div>
+          <div class="slides" id="roomSlides"></div>
           <div class="slide-nav">
-            <div class="dots"><button class="dot active"></button><button class="dot"></button><button
-                class="dot"></button></div>
+            <div class="dots" id="roomDots"></div>
             <div class="slide-arrows"><button class="slide-arrow" id="prevSlide"
                 aria-label="Previous image">←</button><button class="slide-arrow" id="nextSlide"
                 aria-label="Next image">→</button></div>
@@ -766,13 +765,18 @@
         </div>
         <div class="reveal delay1">
           <div class="eyebrow" data-en="Your private space" data-id="Ruang pribadi Anda">Ruang pribadi Anda</div>
-          <h2 data-en="Richmond<br>Deluxe" data-id="Richmond<br>Deluxe">Richmond<br>Deluxe</h2>
-          <p class="lead"
+          <div class="room-title-row">
+            <button class="room-switch prev" id="prevRoom" aria-label="Previous room">←</button>
+            <h2 id="roomTitle">Richmond<br>Deluxe</h2>
+            <button class="room-switch next" id="nextRoom" aria-label="Next room">→</button>
+          </div>
+          <div class="room-counter" id="roomCounter">02 / 03</div>
+          <p class="lead" id="roomLead"
             data-en="A furnished private room with the essentials already considered, so settling in feels simple."
             data-id="Kamar pribadi berperabot dengan kebutuhan utama yang sudah disiapkan, sehingga Anda dapat langsung tinggal dengan nyaman.">
             Kamar pribadi berperabot dengan kebutuhan utama yang sudah disiapkan, sehingga Anda dapat langsung tinggal
             dengan nyaman.</p>
-          <div class="facts">
+          <div class="facts" id="roomDetails">
             <div class="fact" data-en="Private bathroom" data-id="Kamar mandi pribadi"><svg class="fact-icon"
                 viewBox="0 0 24 24" fill="none">
                 <path d="M4 11h16v2a7 7 0 0 1-7 7h-2a7 7 0 0 1-7-7v-2Z" stroke="currentColor" stroke-width="1.7" />
@@ -811,9 +815,7 @@
                 <path d="M5 5h14v14H5zM8 8h8v8H8zM5 9H3m2 6H3m18-6h-2m2 6h-2" stroke="currentColor"
                   stroke-width="1.7" />
               </svg><span>Penggantian seprai berkala</span></div>
-          </div><a class="btn primary"
-            href="https://wa.me/6281319865515?text=Hi%2C%20I%27m%20interested%20in%20the%20Single%20Bedroom%20at%20Richmond%20Kost.%20Is%20it%20available%3F"
-            target="_blank" data-en="Ask about availability" data-id="Tanyakan ketersediaan">Tanyakan ketersediaan</a>
+          </div><a class="btn primary" id="roomAvailability" href="#" target="_blank">Tanyakan ketersediaan</a>
         </div>
       </div>
     </section>
@@ -828,34 +830,34 @@
                 stroke-width="1.7" />
             </svg>
             <h3 data-en="Rest" data-id="Istirahat">Istirahat</h3>
-            <p data-en="Private bathroom<br>Hot water<br>Air conditioning<br>Furnished room"
+            <p data-en="Private bathroom<br>Hot water<br>Air conditioning<br>Furnished room<br>Wall shelf<br>Artisan Painting<br>Ventilation"
               data-id="Kamar mandi pribadi<br>Air panas<br>AC<br>Kamar berperabot">Kamar mandi pribadi<br>Air
-              panas<br>AC<br>Kamar berperabot</p>
+              panas<br>AC<br>Kamar berperabot<br>Rak dinding<br>Artisan Painting<br>Ventilasi</p>
           </div>
           <div class="amen reveal delay1"><svg class="amen-icon" viewBox="0 0 24 24" fill="none">
               <path d="M3 10.5 12 3l9 7.5V21H3V10.5ZM9 21v-6h6v6" stroke="currentColor" stroke-width="1.7" />
             </svg>
-            <h3 data-en="Live" data-id="Keseharian">Keseharian</h3>
+            <h3 data-en="Facilities" data-id="Fasilitas">Fasilitas</h3>
             <p data-en="High-speed Wi-Fi<br>Living room<br>Kitchen & cookware<br>Garden"
               data-id="Wi-Fi berkecepatan tinggi<br>Ruang tamu<br>Dapur & peralatan masak<br>Vertical garden">Wi-Fi berkecepatan
-              tinggi<br>Ruang tamu<br>Dapur & peralatan masak<br>Vertical garden</p>
+              tinggi<br>Ruang tamu<br>Dapur & peralatan masak<br>Vertical garden<br>Dispenser<br>Kulkas</p>
           </div>
           <div class="amen reveal delay2"><svg class="amen-icon" viewBox="0 0 24 24" fill="none">
               <path d="M12 20s-7-4.35-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.65-7 10-7 10Z" stroke="currentColor"
                 stroke-width="1.7" />
             </svg>
             <h3 data-en="Care" data-id="Perawatan">Perawatan</h3>
-            <p data-en="Daily housekeeping<br>Regular linen change<br>Coway RO drinking water<br>Filtered shower water"
+            <p data-en="Daily housekeeping<br>Regular linen change<br>Coway RO drinking water<br>Filtered shower water<br>Marble Terrazzo"
               data-id="Housekeeping harian<br>Penggantian seprai berkala<br>Air minum Coway RO (Reverse Osmosis)<br>Filter air mandi">
-              Housekeeping harian<br>Penggantian seprai berkala<br>Air minum Coway RO (Reverse Osmosis)<br>Filter air mandi</p>
+              Housekeeping harian<br>Penggantian seprai berkala<br>Air minum Coway RO (Reverse Osmosis)<br>Filter air mandi<br>Teraso marmer</p>
           </div>
           <div class="amen reveal delay3"><svg class="amen-icon" viewBox="0 0 24 24" fill="none">
               <path d="M12 3 5 6v5c0 4.8 2.9 8.2 7 10 4.1-1.8 7-5.2 7-10V6l-7-3Zm-3 9 2 2 4-4" stroke="currentColor"
                 stroke-width="1.7" />
             </svg>
             <h3 data-en="Peace of mind" data-id="Keamanan & kenyamanan">Keamanan & kenyamanan</h3>
-            <p data-en="24-hour security<br>Fill something<br>Car parking<br>Motorcycle parking"
-              data-id="Keamanan 24 jam<br>Fill something<br>Parkir mobil<br>Parkir motor">Keamanan 24 jam<br>Fill something<br>Parkir mobil<br>Parkir motor</p>
+            <p data-en="24-hour security<br>Access Card System<br>Car parking<br>Motorcycle parking<br>Jogging Track<br>Newly Renovated"
+              data-id="Keamanan 24 jam<br>Sistem Kartu Akses<br>Parkir mobil<br>Parkir motor<br>Jalur lari santai<br>Baru renovasi">Keamanan 24 jam<br>Sistem Kartu Akses<br>Parkir mobil<br>Jalur lari santai<br>Parkir motor<br>Baru renovasi</p>
           </div>
         </div>
       </div>
@@ -875,7 +877,10 @@
           <div class="nearby"><span class="pill">JIS</span><span class="pill">Sunter Mall</span><span class="pill">K
               Mall</span><span class="pill">Food Centrum</span><span class="pill">Superindo</span><span class="pill">RS
               Hermina</span><span class="pill">MOI</span><span class="pill">Jubilee School</span><span class="pill">Astra</span>
-          <span class="pill">PRJ</span><span class="pill">BCA</span></div>
+          <span class="pill">PRJ</span><span class="pill">BCA</span><span class="pill">Kelapa Gading</span><span class="pill">Alfamart</span>
+          <span class="pill">Indomaret</span><span class="pill">Padel</span><span class="pill">KFC</span><span class="pill">McD</span>
+          <span class="pill">IndomaretRS Mitra Keluarga Kemayoran</span><span class="pill">Green lake</span><span class="pill">Holiday Inn</span>
+          <span class="pill">Sunlake</span></div>
         </div>
         <div class="map-card reveal delay1">
           <iframe title="Richmond Kost location map"
@@ -921,43 +926,105 @@
 
 
   <script>
-    const slides = [...document.querySelectorAll('.slide')];
-    const dots = [...document.querySelectorAll('.dot')];
-    let currentSlide = 0;
-    function showSlide(i) {
-      currentSlide = (i + slides.length) % slides.length;
-      slides.forEach((s, n) => s.classList.toggle('active', n === currentSlide));
-      dots.forEach((d, n) => d.classList.toggle('active', n === currentSlide));
+    const factIcons = {
+      bathroom:`<svg class="fact-icon" viewBox="0 0 24 24" fill="none"><path d="M4 11h16v2a7 7 0 0 1-7 7h-2a7 7 0 0 1-7-7v-2Z" stroke="currentColor" stroke-width="1.7"/><path d="M7 11V6a3 3 0 0 1 6 0M6 20v2m12-2v2" stroke="currentColor" stroke-width="1.7"/></svg>`,
+      ac:`<svg class="fact-icon" viewBox="0 0 24 24" fill="none"><path d="M3 5h18v7H3zM7 9h10M8 15c0 2-2 2-2 4m5-4c0 2-2 2-2 4m5-4c0 2-2 2-2 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>`,
+      heater:`<svg class="fact-icon" viewBox="0 0 24 24" fill="none"><path d="M6 4h12v6H6zM8 21c-2-3 2-4 0-7m4 7c-2-3 2-4 0-7m4 7c-2-3 2-4 0-7" stroke="currentColor" stroke-width="1.7"/></svg>`,
+      bed:`<svg class="fact-icon" viewBox="0 0 24 24" fill="none"><path d="M3 19V9m18 10V12a3 3 0 0 0-3-3H9a3 3 0 0 0-3 3v1h15M3 16h18M6 9V6h5v3" stroke="currentColor" stroke-width="1.7"/></svg>`,
+      desk:`<svg class="fact-icon" viewBox="0 0 24 24" fill="none"><path d="M4 8h16v5H4zM6 13v8m12-8v8M9 17h6" stroke="currentColor" stroke-width="1.7"/></svg>`,
+      window:`<svg class="fact-icon" viewBox="0 0 24 24" fill="none"><rect x="4" y="3" width="16" height="18" rx="1" stroke="currentColor" stroke-width="1.7"/><path d="M12 3v18M4 12h16" stroke="currentColor" stroke-width="1.7"/></svg>`,
+      clean:`<svg class="fact-icon" viewBox="0 0 24 24" fill="none"><path d="M7 3h4l1 8H6l1-8ZM9 11v10M5 21h8" stroke="currentColor" stroke-width="1.7"/></svg>`,
+      linen:`<svg class="fact-icon" viewBox="0 0 24 24" fill="none"><path d="M5 5h14v14H5zM8 8h8v8H8z" stroke="currentColor" stroke-width="1.7"/></svg>`,
+      shower:`<svg class="fact-icon" viewBox="0 0 24 24" fill="none"><path d="M6 9a6 6 0 0 1 12 0M18 9h-5M14 12v1m3-1v1m-6 2v1m3-1v1m3-1v1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>`
+    };
+
+    // Dummy Superior/Executive content for now. Replace these values and photo paths later.
+    const rooms = [
+      {
+        name:'Richmond Superior',
+        lead:{id:'Kamar Richmond Superior yang nyaman dan berperabot lengkap untuk kebutuhan sehari-hari.',en:'A comfortable, fully furnished Richmond Superior room designed for easy everyday living.'},
+        photos:[
+          'https://images.prismic.io/travauxlib/aHo8wkMqNJQqIGXY_hemea_59171_intrieur_dun_htel_moderne_minimaliste_avec_des_co_a7687fa3-abfc-4cd3-ae90-8a3297a514b5_3.png?auto=format%2Ccompress',
+          'https://www.domainedeverchant.com/_novaimg/galleria/1581066.jpg',
+          'https://archify-images-prod.s3.ap-southeast-1.amazonaws.com/files/professional/projects/m/7tgj6xgjda.jpg'
+        ],
+        facts:[
+          ['bathroom','Private bathroom','Kamar mandi pribadi'],['ac','Air conditioning','AC'],['heater','Water heater','Pemanas air'],['bed','Bed & wardrobe','Tempat tidur & lemari'],['desk','Desk & chair','Meja & kursi'],['window','Window','Jendela'],['clean','Daily housekeeping','Housekeeping harian'],['linen','Linen change','Penggantian seprai berkala']
+        ]
+      },
+      {
+        name:'Richmond Deluxe',
+        lead:{id:'Kamar pribadi berperabot dengan kebutuhan utama yang sudah disiapkan, sehingga Anda dapat langsung tinggal dengan nyaman.',en:'A furnished private room with the essentials already considered, so settling in feels simple.'},
+        photos:[
+          'https://www.domainedeverchant.com/_novaimg/galleria/1581066.jpg',
+          'https://images.prismic.io/travauxlib/aHo8wkMqNJQqIGXY_hemea_59171_intrieur_dun_htel_moderne_minimaliste_avec_des_co_a7687fa3-abfc-4cd3-ae90-8a3297a514b5_3.png?auto=format%2Ccompress',
+          'https://archify-images-prod.s3.ap-southeast-1.amazonaws.com/files/professional/projects/m/7tgj6xgjda.jpg'
+        ],
+        facts:[
+          ['bathroom','Private bathroom','Kamar mandi pribadi'],['ac','Air conditioning','AC'],['heater','Water heater','Pemanas air'],['bed','Bed & wardrobe','Tempat tidur & lemari'],['desk','Desk & chair','Meja & kursi'],['window','Window','Jendela'],['clean','Daily housekeeping','Housekeeping harian'],['linen','Linen change','Penggantian seprai berkala']
+        ]
+      },
+      {
+        name:'Richmond Executive',
+        lead:{id:'Richmond Executive dengan ensuite shower room untuk privasi dan kenyamanan ekstra.',en:'Richmond Executive with an ensuite shower room for extra privacy and comfort.'},
+        photos:[
+          'https://archify-images-prod.s3.ap-southeast-1.amazonaws.com/files/professional/projects/m/7tgj6xgjda.jpg',
+          'https://www.domainedeverchant.com/_novaimg/galleria/1581066.jpg',
+          'https://images.prismic.io/travauxlib/aHo8wkMqNJQqIGXY_hemea_59171_intrieur_dun_htel_moderne_minimaliste_avec_des_co_a7687fa3-abfc-4cd3-ae90-8a3297a514b5_3.png?auto=format%2Ccompress'
+        ],
+        facts:[
+          ['shower','Ensuite shower room','Ensuite shower room'],['ac','Air conditioning','AC'],['heater','Water heater','Pemanas air'],['bed','Bed & wardrobe','Tempat tidur & lemari'],['desk','Desk & chair','Meja & kursi'],['window','Window','Jendela'],['clean','Daily housekeeping','Housekeeping harian'],['linen','Linen change','Penggantian seprai berkala']
+        ]
+      }
+    ];
+
+    let language='id', currentRoom=1, currentSlide=0, slideTimer;
+    const enLabel=document.getElementById('langEN'), idLabel=document.getElementById('langID');
+
+    function renderRoom(){
+      const r=rooms[currentRoom];
+      document.getElementById('roomTitle').innerHTML=r.name.replace(' ','<br>');
+      document.getElementById('roomCounter').textContent=String(currentRoom+1).padStart(2,'0')+' / '+String(rooms.length).padStart(2,'0');
+      document.getElementById('roomLead').textContent=r.lead[language];
+      document.getElementById('roomDetails').innerHTML=r.facts.map(f=>`<div class="fact">${factIcons[f[0]]}<span>${language==='id'?f[2]:f[1]}</span></div>`).join('');
+      const msg=language==='id'?`Halo, saya tertarik dengan ${r.name} di Richmond Villa. Apakah kamar ini tersedia?`:`Hi, I'm interested in ${r.name} at Richmond Villa. Is this room available?`;
+      const availability=document.getElementById('roomAvailability');
+      availability.href='https://wa.me/6281319865515?text='+encodeURIComponent(msg);
+      availability.textContent=language==='id'?'Tanyakan ketersediaan':'Ask about availability';
+
+      currentSlide=0;
+      document.getElementById('roomSlides').innerHTML=r.photos.map((url,i)=>`<div class="slide ${i===0?'active':''}" style="background-image:url('${url}')"></div>`).join('');
+      document.getElementById('roomDots').innerHTML=r.photos.map((_,i)=>`<button class="dot ${i===0?'active':''}" aria-label="Photo ${i+1}"></button>`).join('');
+      bindDots(); restartSlider();
     }
-    document.getElementById('nextSlide').onclick = () => showSlide(currentSlide + 1);
-    document.getElementById('prevSlide').onclick = () => showSlide(currentSlide - 1);
-    dots.forEach((d, n) => d.onclick = () => showSlide(n));
-    setInterval(() => showSlide(currentSlide + 1), 5500);
 
-    let language = 'id';
-    const enLabel = document.getElementById('langEN');
-    const idLabel = document.getElementById('langID');
-
-    function applyLanguage(lang) {
-      language = lang;
-      document.documentElement.lang = lang;
-      document.querySelectorAll('[data-en][data-id]').forEach(el => {
-        el.innerHTML = el.dataset[lang];
-      });
-      enLabel.classList.toggle('active', lang === 'en');
-      idLabel.classList.toggle('active', lang === 'id');
-      document.title = lang === 'id'
-        ? 'Richmond Kost | Sunter, Jakarta Utara'
-        : 'Richmond Kost | Sunter, North Jakarta';
+    function showSlide(i){
+      const slides=[...document.querySelectorAll('#roomSlides .slide')], dots=[...document.querySelectorAll('#roomDots .dot')];
+      if(!slides.length)return;
+      currentSlide=(i+slides.length)%slides.length;
+      slides.forEach((s,n)=>s.classList.toggle('active',n===currentSlide));
+      dots.forEach((d,n)=>d.classList.toggle('active',n===currentSlide));
     }
+    function bindDots(){document.querySelectorAll('#roomDots .dot').forEach((d,n)=>d.onclick=()=>{showSlide(n);restartSlider()})}
+    function restartSlider(){clearInterval(slideTimer);slideTimer=setInterval(()=>showSlide(currentSlide+1),5500)}
+    document.getElementById('nextSlide').onclick=()=>{showSlide(currentSlide+1);restartSlider()};
+    document.getElementById('prevSlide').onclick=()=>{showSlide(currentSlide-1);restartSlider()};
+    document.getElementById('nextRoom').onclick=()=>{currentRoom=(currentRoom+1)%rooms.length;renderRoom()};
+    document.getElementById('prevRoom').onclick=()=>{currentRoom=(currentRoom-1+rooms.length)%rooms.length;renderRoom()};
 
-    document.getElementById('langToggle').onclick = () => applyLanguage(language === 'id' ? 'en' : 'id');
+    function applyLanguage(lang){
+      language=lang;document.documentElement.lang=lang;
+      document.querySelectorAll('[data-en][data-id]').forEach(el=>el.innerHTML=el.dataset[lang]);
+      enLabel.classList.toggle('active',lang==='en');idLabel.classList.toggle('active',lang==='id');
+      document.title=lang==='id'?'Richmond Kost | Sunter, Jakarta Utara':'Richmond Kost | Sunter, North Jakarta';
+      renderRoom();
+    }
+    document.getElementById('langToggle').onclick=()=>applyLanguage(language==='id'?'en':'id');
     applyLanguage('id');
 
-    window.addEventListener('load', () => document.body.classList.add('page-ready'), { once: true });
-    const ro = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target) } }), { threshold: .12, rootMargin: '0px 0px -35px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
-
+    window.addEventListener('load',()=>document.body.classList.add('page-ready'),{once:true});
+    const ro=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -35px 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
   </script>
 
 </body>
