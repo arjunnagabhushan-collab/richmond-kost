@@ -1017,7 +1017,7 @@ New Index
 
     function applyLanguage(lang){
       language=lang;document.documentElement.lang=lang;
-      document.querySelectorAll('[data-en][data-id]').forEach(el=>el.textContent=el.dataset[lang]);
+      document.querySelectorAll('[data-en][data-id]').forEach(el=>el.innerHTML=el.dataset[lang]);
       enLabel.classList.toggle('active',lang==='en');idLabel.classList.toggle('active',lang==='id');
       document.title=lang==='id'?'Richmond Kost | Sunter, Jakarta Utara':'Richmond Kost | Sunter, North Jakarta';
       renderRoom();
