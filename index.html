@@ -753,6 +753,17 @@
       .common-reveal{opacity:1!important;transform:none!important}
       .space-card img,.space-lightbox{transition:none!important}
     }
+    /* FAQ — isolated section, preserving existing layout */
+    .faq-section{background:var(--paper)}
+    .faq-head{max-width:760px;margin-bottom:48px}.faq-head h2{font-size:62px;line-height:.95;margin-bottom:16px}.faq-head p{max-width:650px;margin:0;color:var(--muted);line-height:1.8}
+    .faq-list{max-width:900px;border-top:1px solid #d6cfc4}.faq-item{border-bottom:1px solid #d6cfc4}
+    .faq-question{width:100%;display:grid;grid-template-columns:48px 1fr 42px;gap:14px;align-items:center;border:0;background:transparent;color:var(--navy);text-align:left;padding:23px 0;cursor:pointer;font:inherit}
+    .faq-number{font-size:11px;letter-spacing:.12em;color:var(--gold);font-weight:600}.faq-question-text{font-family:"Cormorant Garamond",Georgia,serif;font-size:27px;line-height:1.15}.faq-toggle{width:34px;height:34px;border:1px solid #cfc6b8;background:transparent;display:grid;place-items:center;font-size:22px;font-weight:300;color:var(--navy);transition:transform .25s ease,background .25s ease,color .25s ease}
+    .faq-question:hover .faq-toggle{background:var(--navy);color:#fff}.faq-answer{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease;padding-left:62px}.faq-answer-inner{overflow:hidden;color:var(--muted);line-height:1.85;font-size:14px;max-width:720px}.faq-answer-inner p{margin:0 0 23px}.faq-item.open .faq-answer{grid-template-rows:1fr}.faq-item.open .faq-toggle{transform:rotate(45deg);background:var(--navy);color:#fff}.faq-note{margin-top:20px;font-size:11px;color:var(--muted);letter-spacing:.03em}
+    @media(max-width:800px){.faq-head h2{font-size:48px}.faq-question{grid-template-columns:36px 1fr 38px;gap:9px;padding:20px 0}.faq-question-text{font-size:24px}.faq-answer{padding-left:45px}}
+    @media(max-width:520px){.faq-question-text{font-size:22px}.faq-answer{padding-left:0}.faq-toggle{width:32px;height:32px}}
+    @media(prefers-reduced-motion:reduce){.faq-answer,.faq-toggle{transition:none!important}}
+
 
   </style>
   <noscript>
@@ -780,6 +791,7 @@
         <a href="#room" data-en="Room" data-id="Kamar">Kamar</a>
         <a href="#amenities" data-en="Amenities" data-id="Fasilitas">Fasilitas</a>
         <a href="#location" data-en="Location" data-id="Lokasi">Lokasi</a>
+        <a href="#faq" data-en="FAQ" data-id="FAQ">FAQ</a>
         <button class="lang" id="langToggle" aria-label="Switch language"><span id="langEN">EN</span><b>·</b><span
             id="langID">ID</span></button>
         <a class="goldbtn"
@@ -902,27 +914,32 @@
 
         <div class="space-grid">
           <button class="space-card living common-reveal" data-space="living" aria-label="Open Living Room gallery">
-            <img src="assets/Living Room/livingroom-1.png" alt="Living room reference" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1600&q=82" alt="Living room reference" loading="lazy">
             <span class="space-photo-count">3 PHOTOS</span>
             <span class="space-caption"><strong data-en="Living Room" data-id="Ruang Tamu">Ruang Tamu</strong><span data-en="Relax · Work · Unwind" data-id="Bersantai · Bekerja · Nyaman">Bersantai · Bekerja · Nyaman</span></span>
           </button>
 
           <button class="space-card kitchen common-reveal common-delay1" data-space="kitchen" aria-label="Open Kitchen gallery">
-            <img src="assets/Shared Kitchen/sharedkitchen-1.png" alt="Kitchen reference" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1500&q=82" alt="Kitchen reference" loading="lazy">
             <span class="space-photo-count">3 PHOTOS</span>
             <span class="space-caption"><strong data-en="Shared Kitchen" data-id="Dapur Bersama">Dapur Bersama</strong><span data-en="Everyday cooking made easy" data-id="Memasak sehari-hari lebih mudah">Memasak sehari-hari lebih mudah</span></span>
           </button>
 
           <button class="space-card garden common-reveal common-delay2" data-space="garden" aria-label="Open Vertical Garden gallery">
-            <img src="assets/Garden/garden-1.png" alt="Garden reference" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=1200&q=82" alt="Garden reference" loading="lazy">
             <span class="space-photo-count">3 PHOTOS</span>
             <span class="space-caption"><strong data-en="Vertical Garden" data-id="Taman Vertikal">Taman Vertikal</strong><span data-en="A touch of green" data-id="Sentuhan hijau">Sentuhan hijau</span></span>
           </button>
 <button class="space-card parking common-reveal common-delay4" data-space="parking" aria-label="Open Parking gallery">
-            <img src="assets/Parking/parking-1.png" alt="Parking reference" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1590674899484-d5640e854abe?auto=format&fit=crop&w=1600&q=82" alt="Parking reference" loading="lazy">
             <span class="space-photo-count">3 PHOTOS</span>
             <span class="space-caption"><strong data-en="Parking & Exterior" data-id="Parkir & Eksterior">Parkir & Eksterior</strong><span data-en="Arrival · Access · Exterior" data-id="Kedatangan · Akses · Eksterior">Kedatangan · Akses · Eksterior</span></span>
           </button>
+        </div>
+
+        <div class="space-note" data-en="Reference images for layout preview — replace each gallery with your Richmond Villa photos."
+             data-id="Foto referensi untuk pratinjau tata letak — ganti setiap galeri dengan foto Richmond Villa Anda.">
+             Foto referensi untuk pratinjau tata letak — ganti setiap galeri dengan foto Richmond Villa Anda.
         </div>
       </div>
     </section>
@@ -1010,6 +1027,27 @@
         </div>
       </div>
     </section>
+
+    <section id="faq" class="faq-section"><div class="wrap"><div class="faq-head reveal"><div class="eyebrow" data-en="Frequently asked questions" data-id="Pertanyaan yang sering diajukan">Pertanyaan yang sering diajukan</div><h2 data-en="Everything you need to know before making Richmond Villa your new home." data-id="Semua yang perlu Anda ketahui sebelum menjadikan Richmond Villa rumah baru Anda.">Semua yang perlu Anda ketahui sebelum menjadikan Richmond Villa rumah baru Anda.</h2><p data-en="Find answers to the questions residents and prospective residents ask most often." data-id="Temukan jawaban atas pertanyaan yang paling sering diajukan oleh penghuni dan calon penghuni.">Temukan jawaban atas pertanyaan yang paling sering diajukan oleh penghuni dan calon penghuni.</p></div><div class="faq-list reveal delay1">
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-number">01</span><span class="faq-question-text" data-en="What makes Richmond Villa different from a typical kost?" data-id="Apa yang membuat Richmond Villa berbeda dari kost pada umumnya?">Apa yang membuat Richmond Villa berbeda dari kost pada umumnya?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p data-en="Richmond Villa is designed with a <strong>premium villa concept</strong>, combining comfortable private rooms with thoughtfully designed shared spaces, a vertical garden, and a rooftop garden. The property is intended to provide a calm, clean, and comfortable living environment with the atmosphere of a private villa." data-id="Richmond Villa dirancang dengan <strong>konsep premium villa</strong>, yang menggabungkan kamar pribadi yang nyaman dengan ruang bersama yang tertata, vertical garden, dan rooftop garden. Properti ini dirancang untuk memberikan suasana tinggal yang tenang, bersih, nyaman, dan memiliki nuansa seperti tinggal di villa pribadi.">Richmond Villa dirancang dengan <strong>konsep premium villa</strong>, yang menggabungkan kamar pribadi yang nyaman dengan ruang bersama yang tertata, vertical garden, dan rooftop garden. Properti ini dirancang untuk memberikan suasana tinggal yang tenang, bersih, nyaman, dan memiliki nuansa seperti tinggal di villa pribadi.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-number">02</span><span class="faq-question-text" data-en="Where is Richmond Villa located, and is the neighborhood secure?" data-id="Di mana Richmond Villa berada dan apakah lingkungannya aman?">Di mana Richmond Villa berada dan apakah lingkungannya aman?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p data-en="Richmond Villa is located in an <strong>elite residential complex in Sunter</strong>, with <strong>24/7 security and CCTV monitoring</strong> to provide a safe and comfortable environment for residents." data-id="Richmond Villa berada di <strong>komplek perumahan elite di Sunter</strong>, yang dilengkapi dengan <strong>keamanan 24 jam dan CCTV</strong>, sehingga penghuni dapat merasa aman dan nyaman selama tinggal.">Richmond Villa berada di <strong>komplek perumahan elite di Sunter</strong>, yang dilengkapi dengan <strong>keamanan 24 jam dan CCTV</strong>, sehingga penghuni dapat merasa aman dan nyaman selama tinggal.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-number">03</span><span class="faq-question-text" data-en="How is the access to Richmond Villa?" data-id="Bagaimana akses menuju Richmond Villa?">Bagaimana akses menuju Richmond Villa?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p data-en="The access road to Richmond Villa is wide enough for <strong>up to three cars</strong>, providing convenient access for residents, guests, and vehicles." data-id="Jalan akses menuju Richmond Villa cukup luas dan dapat dilalui oleh <strong>hingga tiga mobil</strong>, sehingga memberikan akses yang nyaman bagi penghuni, tamu, maupun kendaraan.">Jalan akses menuju Richmond Villa cukup luas dan dapat dilalui oleh <strong>hingga tiga mobil</strong>, sehingga memberikan akses yang nyaman bagi penghuni, tamu, maupun kendaraan.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-number">04</span><span class="faq-question-text" data-en="Are parking facilities available?" data-id="Apakah tersedia fasilitas parkir?">Apakah tersedia fasilitas parkir?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p data-en="Yes. Parking is available <strong>inside the property</strong>, while additional parking is also available in the garden area, approximately a <strong>2-minute walk</strong> from the villa." data-id="Ya. Parkir tersedia <strong>di dalam area rumah</strong>, dan tersedia juga area parkir tambahan di taman yang berjarak sekitar <strong>2 menit berjalan kaki</strong> dari villa.">Ya. Parkir tersedia <strong>di dalam area rumah</strong>, dan tersedia juga area parkir tambahan di taman yang berjarak sekitar <strong>2 menit berjalan kaki</strong> dari villa.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-number">05</span><span class="faq-question-text" data-en="What types of rooms are available?" data-id="Apa saja tipe kamar yang tersedia?">Apa saja tipe kamar yang tersedia?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p data-en="Richmond Villa offers several room types to suit different preferences. Depending on the room, residents may enjoy views of the <strong>balcony, Japanese Bonsai Garden, or shared areas</strong>." data-id="Richmond Villa menyediakan beberapa pilihan tipe kamar sesuai dengan kebutuhan dan preferensi penghuni. Tergantung pada tipe kamar, penghuni dapat menikmati pemandangan <strong>balcony, Japanese Bonsai Garden, maupun area bersama</strong>.">Richmond Villa menyediakan beberapa pilihan tipe kamar sesuai dengan kebutuhan dan preferensi penghuni. Tergantung pada tipe kamar, penghuni dapat menikmati pemandangan <strong>balcony, Japanese Bonsai Garden, maupun area bersama</strong>.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-number">06</span><span class="faq-question-text" data-en="What is included in the room interior?" data-id="Apa saja yang tersedia di dalam kamar?">Apa saja yang tersedia di dalam kamar?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p data-en="Each room is thoughtfully designed with features such as <strong>artisan paintings, wall shelving, and mirrors</strong>, creating a warm and refined interior while providing practical storage and living space." data-id="Setiap kamar dirancang dengan memperhatikan kenyamanan dan estetika, dilengkapi dengan <strong>artisan painting, rak dinding, dan cermin</strong>, sehingga menciptakan suasana kamar yang hangat, rapi, dan nyaman.">Setiap kamar dirancang dengan memperhatikan kenyamanan dan estetika, dilengkapi dengan <strong>artisan painting, rak dinding, dan cermin</strong>, sehingga menciptakan suasana kamar yang hangat, rapi, dan nyaman.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-number">07</span><span class="faq-question-text" data-en="What shared facilities are available?" data-id="Apa saja fasilitas ruang bersama?">Apa saja fasilitas ruang bersama?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p data-en="The shared area is designed as a comfortable space for residents to relax and socialize. It is equipped with <strong>sofas and a dining table</strong>, providing a welcoming common area within the villa." data-id="Ruang bersama dirancang sebagai tempat yang nyaman bagi penghuni untuk bersantai maupun bersosialisasi. Area ini dilengkapi dengan <strong>sofa dan meja makan</strong>, sehingga dapat digunakan sebagai ruang bersama yang nyaman.">Ruang bersama dirancang sebagai tempat yang nyaman bagi penghuni untuk bersantai maupun bersosialisasi. Area ini dilengkapi dengan <strong>sofa dan meja makan</strong>, sehingga dapat digunakan sebagai ruang bersama yang nyaman.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-number">08</span><span class="faq-question-text" data-en="What kitchen and dining facilities are provided?" data-id="Apa saja fasilitas dapur yang tersedia?">Apa saja fasilitas dapur yang tersedia?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p data-en="Residents have access to shared kitchen facilities including <strong>two refrigerators, two water dispensers, a microwave, rice cooker, electric kettle, plates, mugs, glasses, and an electric stove</strong>." data-id="Fasilitas dapur bersama tersedia dan mencakup <strong>2 unit kulkas, 2 unit dispenser, microwave, rice cooker, ketel air panas, piring, mug, gelas, dan kompor listrik</strong>.">Fasilitas dapur bersama tersedia dan mencakup <strong>2 unit kulkas, 2 unit dispenser, microwave, rice cooker, ketel air panas, piring, mug, gelas, dan kompor listrik</strong>.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-number">09</span><span class="faq-question-text" data-en="What type of drinking water is provided?" data-id="Air minum seperti apa yang disediakan?">Air minum seperti apa yang disediakan?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p data-en="Richmond Villa provides drinking water through a <strong>Coway RO (Reverse Osmosis) water purifier</strong>. The system uses purified water directly and is <strong>not based on refillable gallon water</strong>." data-id="Richmond Villa menyediakan air minum menggunakan <strong>water purifier Coway dengan sistem RO (Reverse Osmosis)</strong>. Air diproses menggunakan sistem pemurnian RO dan <strong>bukan menggunakan air galon isi ulang</strong>.">Richmond Villa menyediakan air minum menggunakan <strong>water purifier Coway dengan sistem RO (Reverse Osmosis)</strong>. Air diproses menggunakan sistem pemurnian RO dan <strong>bukan menggunakan air galon isi ulang</strong>.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-number">10</span><span class="faq-question-text" data-en="Is the bathroom water filtered?" data-id="Apakah air kamar mandi dilengkapi dengan filter?">Apakah air kamar mandi dilengkapi dengan filter?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p data-en="Yes. In addition to a <strong>water heater</strong>, the bathroom water supply is equipped with a <strong>water filtration system</strong> to provide cleaner water for everyday use." data-id="Ya. Selain dilengkapi dengan <strong>water heater</strong>, air kamar mandi juga menggunakan <strong>sistem filter air</strong> untuk membantu menyediakan air yang lebih bersih untuk kebutuhan sehari-hari.">Ya. Selain dilengkapi dengan <strong>water heater</strong>, air kamar mandi juga menggunakan <strong>sistem filter air</strong> untuk membantu menyediakan air yang lebih bersih untuk kebutuhan sehari-hari.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-number">11</span><span class="faq-question-text" data-en="Is housekeeping provided?" data-id="Apakah tersedia layanan housekeeping?">Apakah tersedia layanan housekeeping?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p data-en="Yes. <strong>Daily housekeeping</strong> is provided to help maintain a clean and comfortable living environment. Housekeeping is performed daily rather than only once a week." data-id="Ya. Richmond Villa menyediakan <strong>daily housekeeping</strong>, sehingga kebersihan area dan kamar dapat terjaga setiap hari. Layanan ini dilakukan setiap hari, bukan hanya satu kali dalam seminggu.">Ya. Richmond Villa menyediakan <strong>daily housekeeping</strong>, sehingga kebersihan area dan kamar dapat terjaga setiap hari. Layanan ini dilakukan setiap hari, bukan hanya satu kali dalam seminggu.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-number">12</span><span class="faq-question-text" data-en="How often are the bed sheets changed?" data-id="Seberapa sering seprai kamar diganti?">Seberapa sering seprai kamar diganti?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p data-en="Bed sheets are replaced <strong>every two weeks</strong>, ensuring a fresh and comfortable sleeping environment. This is more frequent than a typical monthly replacement schedule." data-id="Seprai kamar diganti <strong>setiap 2 minggu sekali</strong>, sehingga penghuni dapat menikmati tempat tidur yang tetap bersih dan nyaman. Penggantian dilakukan lebih sering dibandingkan jadwal bulanan.">Seprai kamar diganti <strong>setiap 2 minggu sekali</strong>, sehingga penghuni dapat menikmati tempat tidur yang tetap bersih dan nyaman. Penggantian dilakukan lebih sering dibandingkan jadwal bulanan.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-number">13</span><span class="faq-question-text" data-en="Is there regular deep cleaning?" data-id="Apakah tersedia pembersihan khusus untuk debu dan tungau?">Apakah tersedia pembersihan khusus untuk debu dan tungau?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p data-en="Yes. The rooms receive <strong>anti-dust and anti-mite vacuum cleaning every two months</strong> as part of the property's regular cleanliness and maintenance routine." data-id="Ya. Kamar mendapatkan <strong>vacuum cleaning khusus untuk membantu mengurangi debu dan tungau setiap 2 bulan sekali</strong> sebagai bagian dari perawatan kebersihan rutin.">Ya. Kamar mendapatkan <strong>vacuum cleaning khusus untuk membantu mengurangi debu dan tungau setiap 2 bulan sekali</strong> sebagai bagian dari perawatan kebersihan rutin.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-number">14</span><span class="faq-question-text" data-en="Is the property newly renovated?" data-id="Apakah unitnya baru direnovasi?">Apakah unitnya baru direnovasi?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p data-en="Yes. The available units are <strong>newly renovated</strong> and prepared to provide residents with a fresh and comfortable living environment." data-id="Ya. Unit yang tersedia merupakan <strong>unit yang baru direnovasi</strong> dan dipersiapkan untuk memberikan suasana tinggal yang bersih, segar, dan nyaman.">Ya. Unit yang tersedia merupakan <strong>unit yang baru direnovasi</strong> dan dipersiapkan untuk memberikan suasana tinggal yang bersih, segar, dan nyaman.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-number">15</span><span class="faq-question-text" data-en="What type of flooring does Richmond Villa have?" data-id="Apa jenis lantai yang digunakan?">Apa jenis lantai yang digunakan?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p data-en="The property features <strong>polished terrazzo marble flooring</strong>, giving the villa a clean, elegant, and refined appearance." data-id="Richmond Villa menggunakan <strong>lantai marmer teraso yang telah dipoles</strong>, sehingga memberikan tampilan yang bersih, elegan, dan rapi.">Richmond Villa menggunakan <strong>lantai marmer teraso yang telah dipoles</strong>, sehingga memberikan tampilan yang bersih, elegan, dan rapi.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-number">16</span><span class="faq-question-text" data-en="Are there gardens or other outdoor features?" data-id="Apakah tersedia taman atau fasilitas outdoor?">Apakah tersedia taman atau fasilitas outdoor?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p data-en="Yes. Richmond Villa features a <strong>vertical garden and rooftop garden</strong>, as well as a <strong>Japanese Bonsai Garden</strong>. The property also has an ornamental <strong>Holland Lop rabbit</strong> and a fish pond, adding a relaxing and natural atmosphere to the villa." data-id="Ya. Richmond Villa memiliki <strong>vertical garden dan rooftop garden</strong>, serta <strong>Japanese Bonsai Garden</strong>. Di area villa juga terdapat <strong>kelinci hias Holland Lop dan kolam ikan</strong>, yang menambah suasana alami dan menenangkan.">Ya. Richmond Villa memiliki <strong>vertical garden dan rooftop garden</strong>, serta <strong>Japanese Bonsai Garden</strong>. Di area villa juga terdapat <strong>kelinci hias Holland Lop dan kolam ikan</strong>, yang menambah suasana alami dan menenangkan.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-number">17</span><span class="faq-question-text" data-en="Is laundry service included?" data-id="Apakah layanan laundry sudah termasuk?">Apakah layanan laundry sudah termasuk?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p data-en="<strong>Laundry service is not included</strong> with the room. Residents are responsible for arranging their own laundry service." data-id="<strong>Layanan laundry tidak termasuk</strong> dalam fasilitas kamar. Penghuni dapat mengatur kebutuhan laundry secara mandiri sesuai dengan preferensi masing-masing."><strong>Layanan laundry tidak termasuk</strong> dalam fasilitas kamar. Penghuni dapat mengatur kebutuhan laundry secara mandiri sesuai dengan preferensi masing-masing.</p></div></div></article>
+          <article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span class="faq-number">18</span><span class="faq-question-text" data-en="Is Richmond Villa managed or supported by Rukita?" data-id="Apakah Richmond Villa didukung oleh Rukita?">Apakah Richmond Villa didukung oleh Rukita?</span><span class="faq-toggle" aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner"><p data-en="Yes. Richmond Villa is <strong>supported by Rukita</strong>, providing additional professional support in the management and resident experience." data-id="Ya. Richmond Villa <strong>didukung oleh Rukita</strong>, sehingga penghuni mendapatkan dukungan tambahan dalam pengelolaan properti dan pengalaman tinggal.">Ya. Richmond Villa <strong>didukung oleh Rukita</strong>, sehingga penghuni mendapatkan dukungan tambahan dalam pengelolaan properti dan pengalaman tinggal.</p></div></div></article>
+        </div><div class="faq-note reveal" data-en="Tap any question to reveal its answer." data-id="Ketuk pertanyaan apa pun untuk melihat jawabannya.">Ketuk pertanyaan apa pun untuk melihat jawabannya.</div></div></section>
     <section class="cta">
       <div class="wrap reveal">
         <div class="eyebrow" data-en="Come home to Richmond" data-id="Jadikan Richmond rumah Anda">Jadikan Richmond
@@ -1061,9 +1099,9 @@
         name:'Richmond Superior',
         lead:{id:'Dirancang dengan cermat untuk hunian budget yang nyaman, fasilitas kamar mandi bersama (1 shower untuk 3 unit ) dan penggantian seprai bersih setiap 2 minggu.',en:'Thoughtfully designed for comfortable living, with a shared bathroom between 3 units and linen change every 2 weeks.'},
         photos:[
-          'assets/Superior Rooms/superior-1.png',
-          'assets/Superior Rooms/superior-2.png',
-          'assets/Superior Rooms/superior-3.png'
+          'https://images.prismic.io/travauxlib/aHo8wkMqNJQqIGXY_hemea_59171_intrieur_dun_htel_moderne_minimaliste_avec_des_co_a7687fa3-abfc-4cd3-ae90-8a3297a514b5_3.png?auto=format%2Ccompress',
+          'https://www.domainedeverchant.com/_novaimg/galleria/1581066.jpg',
+          'https://archify-images-prod.s3.ap-southeast-1.amazonaws.com/files/professional/projects/m/7tgj6xgjda.jpg'
         ],
         facts:[
           ['bathroom','Shared bathroom','Kamar mandi sharing'],['ac','Air conditioning','AC'],['heater','Water heater','Pemanas air'],['bed','Bed & wardrobe','Tempat tidur & lemari'],['desk','Desk & chair','Meja & kursi'],['window','Window','Jendela'],['clean','Daily housekeeping','Housekeeping harian'],['linen','Linen change','Penggantian seprai berkala']
@@ -1073,13 +1111,9 @@
         name:'Richmond Deluxe',
         lead:{id:'Mengutamakan kualitas kamar premium dengan kamar mandi bersama (1 shower untuk 3 unit), ditambah penggantian seprai bersih setiap 2 minggu.',en:'A comfortable stay with a shared bathroom between 3 units, plus linen change every 2 weeks.'},
         photos:[
-          'assets/Deluxe Rooms/deluxe-1.png',
-          'assets/Deluxe Rooms/deluxe-2.png',
-          'assets/Deluxe Rooms/deluxe-3.png',
-          'assets/Deluxe Rooms/deluxe-4.png',
-          'assets/Deluxe Rooms/deluxe-5.png',
-          'assets/Deluxe Rooms/deluxe-6.png',
-          'assets/Deluxe Rooms/deluxe-7.png'
+          'https://www.domainedeverchant.com/_novaimg/galleria/1581066.jpg',
+          'https://images.prismic.io/travauxlib/aHo8wkMqNJQqIGXY_hemea_59171_intrieur_dun_htel_moderne_minimaliste_avec_des_co_a7687fa3-abfc-4cd3-ae90-8a3297a514b5_3.png?auto=format%2Ccompress',
+          'https://archify-images-prod.s3.ap-southeast-1.amazonaws.com/files/professional/projects/m/7tgj6xgjda.jpg'
         ],
         facts:[
           ['bathroom','Shared bathroom','Kamar mandi sharing'],['ac','Air conditioning','AC'],['heater','Water heater','Pemanas air'],['bed','Bed & wardrobe','Tempat tidur & lemari'],['desk','Desk & chair','Meja & kursi'],['window','Window','Jendela'],['clean','Daily housekeeping','Housekeeping harian'],['linen','Linen change','Penggantian seprai berkala']
@@ -1089,10 +1123,9 @@
         name:'Richmond Executive',
         lead:{id:'Nikmati kenyamanan tinggal rasa premium dan shower kamar mandi dalam modern, juga penggantian seprai bersih setiap 2 minggu.',en:'Enjoy the privacy of your own private bathroom, with fresh linen changed every 2 weeks.'},
         photos:[
-          'assets/Executive Rooms/executive-1.png',
-          'assets/Executive Rooms/executive-2.png',
-          'assets/Executive Rooms/executive-3.png',
-          'assets/Executive Rooms/executive-4.png'
+          'https://archify-images-prod.s3.ap-southeast-1.amazonaws.com/files/professional/projects/m/7tgj6xgjda.jpg',
+          'https://www.domainedeverchant.com/_novaimg/galleria/1581066.jpg',
+          'https://images.prismic.io/travauxlib/aHo8wkMqNJQqIGXY_hemea_59171_intrieur_dun_htel_moderne_minimaliste_avec_des_co_a7687fa3-abfc-4cd3-ae90-8a3297a514b5_3.png?auto=format%2Ccompress'
         ],
         facts:[
           ['shower','Private bathroom','Kamar mandi pribadi'],['ac','Air conditioning','AC'],['heater','Water heater','Pemanas air'],['bed','Bed & wardrobe','Tempat tidur & lemari'],['desk','Desk & chair','Meja & kursi'],['window','Window','Jendela'],['clean','Daily housekeeping','Housekeeping harian'],['linen','Linen change','Penggantian seprai berkala']
@@ -1145,39 +1178,42 @@
     applyLanguage('id');
 
 
+
+    // FAQ accordion — one answer open at a time.
+    document.querySelectorAll('.faq-question').forEach(button=>{button.addEventListener('click',()=>{const item=button.closest('.faq-item');const wasOpen=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(openItem=>{openItem.classList.remove('open');openItem.querySelector('.faq-question').setAttribute('aria-expanded','false')});if(!wasOpen){item.classList.add('open');button.setAttribute('aria-expanded','true')}})});
+
     // Common-space galleries. Replace these reference URLs with your own 2–3 images per section later.
     const spaceGalleries={
       living:{
         title:{id:'Ruang Tamu',en:'Living Room'},
         photos:[
-          'assets/Living Room/livingroom-1.png',
-          'assets/Living Room/livingroom-2.png',
-          'assets/Living Room/livingroom-3.png',
+          'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1800&q=86',
+          'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1800&q=86',
+          'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1800&q=86'
         ]
       },
       kitchen:{
         title:{id:'Dapur Bersama',en:'Shared Kitchen'},
         photos:[
-          'assets/Shared Kitchen/sharedkitchen-1.png',
-          'assets/Shared Kitchen/sharedkitchen-2.png',
-          'assets/Shared Kitchen/sharedkitchen-3.png',
-          'assets/Shared Kitchen/sharedkitchen-4.png',
-          'assets/Shared Kitchen/sharedkitchen-5.png'
+          'https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=1800&q=86',
+          'https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?auto=format&fit=crop&w=1800&q=86',
+          'https://images.unsplash.com/photo-1556912167-f556f1f39fdf?auto=format&fit=crop&w=1800&q=86'
         ]
       },
       garden:{
         title:{id:'Taman Vertikal',en:'Vertical Garden'},
         photos:[
-          'assets/Garden/garden-1.png',
-          'assets/Garden/garden-2.png',
-          'assets/Garden/garden-3.png'
+          'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=1800&q=86',
+          'https://images.unsplash.com/photo-1444392061186-9fc38f84f726?auto=format&fit=crop&w=1800&q=86',
+          'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=1800&q=86'
         ]
       },
       parking:{
         title:{id:'Parkir & Eksterior',en:'Parking & Exterior'},
         photos:[
-          'assets/Parking/parking-1.png',
-          'assets/Parking/parking-2.png'
+          'https://images.unsplash.com/photo-1590674899484-d5640e854abe?auto=format&fit=crop&w=1800&q=86',
+          'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=86',
+          'https://images.unsplash.com/photo-1600566753051-f0b89df2dd90?auto=format&fit=crop&w=1800&q=86'
         ]
       }
     };
