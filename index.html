@@ -270,6 +270,42 @@
       background: #ddd
     }
 
+    /* Room photo enlargement viewer */
+    .slide { pointer-events: none; cursor: zoom-in; }
+    .slide.active { pointer-events: auto; }
+    .room-lightbox {
+      position: fixed; inset: 0; z-index: 10000; background: rgba(4,15,24,.96);
+      display: none; align-items: center; justify-content: center; opacity: 0;
+      transition: opacity .25s ease;
+    }
+    .room-lightbox.open { display: flex; opacity: 1; }
+    .room-lightbox-image {
+      max-width: min(1180px, 86vw); max-height: 80vh; width: auto; height: auto;
+      object-fit: contain; box-shadow: 0 22px 70px rgba(0,0,0,.35);
+    }
+    .room-lightbox-close, .room-lightbox-arrow {
+      position: absolute; border: 1px solid rgba(255,255,255,.34);
+      background: rgba(255,255,255,.06); color: #fff; cursor: pointer;
+      display: grid; place-items: center;
+    }
+    .room-lightbox-close { top: 24px; right: 28px; width: 44px; height: 44px; font-size: 25px; }
+    .room-lightbox-arrow { top: 50%; width: 48px; height: 58px; font-size: 26px; transform: translateY(-50%); }
+    .room-lightbox-prev { left: 28px; }
+    .room-lightbox-next { right: 28px; }
+    .room-lightbox-meta { position: absolute; left: 50%; bottom: 24px; transform: translateX(-50%); text-align: center; color: #fff; }
+    .room-lightbox-meta strong { font-family: "Cormorant Garamond", Georgia, serif; font-size: 26px; font-weight: 500; }
+    .room-lightbox-meta span { display: block; margin-top: 4px; font-size: 11px; letter-spacing: .12em; color: rgba(255,255,255,.68); }
+    @media(max-width:800px) {
+      .room-lightbox-image { max-width: 92vw; max-height: 72vh; }
+      .room-lightbox-arrow { width: 42px; height: 52px; }
+      .room-lightbox-prev { left: 10px; }
+      .room-lightbox-next { right: 10px; }
+    }
+    @media(max-width:520px) {
+      .room-lightbox-close { top: 16px; right: 16px; }
+      .room-lightbox-meta { bottom: 18px; }
+    }
+
     .slides {
       height: 100%;
       position: relative
@@ -1015,6 +1051,14 @@
       </div>
     </section>
 
+    <div class="room-lightbox" id="roomLightbox" role="dialog" aria-modal="true" aria-label="Room photo gallery">
+      <button class="room-lightbox-close" id="roomLightboxClose" aria-label="Close room gallery">×</button>
+      <button class="room-lightbox-arrow room-lightbox-prev" id="roomLightboxPrev" aria-label="Previous room photo">‹</button>
+      <img class="room-lightbox-image" id="roomLightboxImage" alt="">
+      <button class="room-lightbox-arrow room-lightbox-next" id="roomLightboxNext" aria-label="Next room photo">›</button>
+      <div class="room-lightbox-meta"><strong id="roomLightboxTitle"></strong><span id="roomLightboxCounter"></span></div>
+    </div>
+
     <div class="space-lightbox" id="spaceLightbox" role="dialog" aria-modal="true" aria-label="Common spaces photo gallery">
       <button class="lightbox-close" id="lightboxClose" aria-label="Close gallery">×</button>
       <button class="lightbox-arrow lightbox-prev" id="lightboxPrev" aria-label="Previous photo">‹</button>
@@ -1347,7 +1391,7 @@
         name:'Richmond Superior',
         lead:{id:'Dirancang dengan cermat untuk hunian budget yang nyaman, fasilitas kamar mandi bersama (1 shower untuk 3 unit ) dan penggantian seprai bersih setiap 2 minggu.',en:'Thoughtfully designed for comfortable living, with a shared bathroom between 3 units and linen change every 2 weeks.'},
         photos:[
-          'assets/Superior Rooms/superior-1.png',
+          'assets/Superior Rooms/superior-1.webp',
           'assets/Superior Rooms/superior-2.webp',
           'assets/Superior Rooms/superior-3.webp',
           'assets/Superior Rooms/superior-4.webp',
@@ -1434,6 +1478,60 @@
     document.getElementById('prevSlide').onclick=()=>{showSlide(currentSlide-1);restartSlider()};
     document.getElementById('nextRoom').onclick=()=>{currentRoom=(currentRoom+1)%rooms.length;renderRoom()};
     document.getElementById('prevRoom').onclick=()=>{currentRoom=(currentRoom-1+rooms.length)%rooms.length;renderRoom()};
+
+    // Full-screen room gallery: keeps the carousel, dots, and autoplay intact.
+    const roomLightbox=document.getElementById('roomLightbox');
+    const roomLightboxImage=document.getElementById('roomLightboxImage');
+    const roomLightboxTitle=document.getElementById('roomLightboxTitle');
+    const roomLightboxCounter=document.getElementById('roomLightboxCounter');
+
+    function showRoomLightboxPhoto(index){
+      const room=rooms[currentRoom];
+      currentSlide=(index+room.photos.length)%room.photos.length;
+      showSlide(currentSlide);
+      roomLightboxImage.src=room.photos[currentSlide];
+      roomLightboxImage.alt=room.name+' photo '+(currentSlide+1);
+      roomLightboxTitle.textContent=room.name;
+      roomLightboxCounter.textContent=(currentSlide+1)+' / '+room.photos.length;
+    }
+    function openRoomLightbox(index=currentSlide){
+      showRoomLightboxPhoto(index);
+      clearInterval(slideTimer);
+      roomLightbox.classList.add('open');
+      roomLightbox.setAttribute('aria-hidden','false');
+      document.body.style.overflow='hidden';
+    }
+    function closeRoomLightbox(){
+      roomLightbox.classList.remove('open');
+      roomLightbox.setAttribute('aria-hidden','true');
+      document.body.style.overflow='';
+      restartSlider();
+    }
+    document.getElementById('roomSlides').addEventListener('click',event=>{
+      const clickedSlide=event.target.closest('.slide');
+      if(clickedSlide && clickedSlide.classList.contains('active')) openRoomLightbox(currentSlide);
+    });
+    document.getElementById('roomLightboxClose').onclick=closeRoomLightbox;
+    document.getElementById('roomLightboxPrev').onclick=()=>showRoomLightboxPhoto(currentSlide-1);
+    document.getElementById('roomLightboxNext').onclick=()=>showRoomLightboxPhoto(currentSlide+1);
+    roomLightbox.addEventListener('click',event=>{if(event.target===roomLightbox)closeRoomLightbox();});
+
+    let roomTouchStartX=null;
+    roomLightbox.addEventListener('touchstart',event=>{
+      if(event.touches.length===1) roomTouchStartX=event.touches[0].clientX;
+    },{passive:true});
+    roomLightbox.addEventListener('touchend',event=>{
+      if(roomTouchStartX===null || !event.changedTouches.length)return;
+      const delta=event.changedTouches[0].clientX-roomTouchStartX;
+      if(Math.abs(delta)>45) showRoomLightboxPhoto(currentSlide+(delta<0?1:-1));
+      roomTouchStartX=null;
+    },{passive:true});
+    document.addEventListener('keydown',event=>{
+      if(!roomLightbox.classList.contains('open'))return;
+      if(event.key==='Escape')closeRoomLightbox();
+      if(event.key==='ArrowLeft')showRoomLightboxPhoto(currentSlide-1);
+      if(event.key==='ArrowRight')showRoomLightboxPhoto(currentSlide+1);
+    });
 
     function applyLanguage(lang){
       language=lang;document.documentElement.lang=lang;
