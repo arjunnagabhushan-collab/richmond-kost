@@ -238,8 +238,10 @@
       height: 650px;
       position: relative;
       overflow: hidden;
-      background: #ddd
+      background: #ddd;
+      cursor: zoom-in
     }
+    .room-photo .slide { cursor: zoom-in }
 
     .slides {
       height: 100%;
@@ -1307,7 +1309,7 @@
         name:'Richmond Superior',
         lead:{id:'Dirancang dengan cermat untuk hunian budget yang nyaman, fasilitas kamar mandi bersama (1 shower untuk 3 unit ) dan penggantian seprai bersih setiap 2 minggu.',en:'Thoughtfully designed for comfortable living, with a shared bathroom between 3 units and linen change every 2 weeks.'},
         photos:[
-          'assets/Superior Rooms/superior-1.png',
+          'assets/Superior Rooms/superior-1.webp',
           'assets/Superior Rooms/superior-2.webp',
           'assets/Superior Rooms/superior-3.webp',
           'assets/Superior Rooms/superior-4.webp',
@@ -1376,7 +1378,7 @@
       availability.textContent=language==='id'?'Tanyakan ketersediaan':'Ask about availability';
 
       currentSlide=0;
-      document.getElementById('roomSlides').innerHTML=r.photos.map((url,i)=>`<div class="slide ${i===0?'active':''}" style="background-image:url('${url}')"></div>`).join('');
+      document.getElementById('roomSlides').innerHTML=r.photos.map((url,i)=>`<div class="slide ${i===0?'active':''}" role="button" tabindex="0" aria-label="View ${r.name} photo ${i+1} enlarged" style="background-image:url('${url}')"></div>`).join('');
       document.getElementById('roomDots').innerHTML=r.photos.map((_,i)=>`<button class="dot ${i===0?'active':''}" aria-label="Photo ${i+1}"></button>`).join('');
       bindDots(); restartSlider();
     }
@@ -1392,6 +1394,19 @@
     function restartSlider(){clearInterval(slideTimer);slideTimer=setInterval(()=>showSlide(currentSlide+1),5500)}
     document.getElementById('nextSlide').onclick=()=>{showSlide(currentSlide+1);restartSlider()};
     document.getElementById('prevSlide').onclick=()=>{showSlide(currentSlide-1);restartSlider()};
+    document.getElementById('roomSlides').addEventListener('click',e=>{
+      const slide=e.target.closest('.slide');
+      if(!slide)return;
+      const index=[...document.querySelectorAll('#roomSlides .slide')].indexOf(slide);
+      if(index>=0)openRoomGallery(index);
+    });
+    document.getElementById('roomSlides').addEventListener('keydown',e=>{
+      if((e.key==='Enter'||e.key===' ')&&e.target.classList.contains('slide')){
+        e.preventDefault();
+        const index=[...document.querySelectorAll('#roomSlides .slide')].indexOf(e.target);
+        if(index>=0)openRoomGallery(index);
+      }
+    });
     document.getElementById('nextRoom').onclick=()=>{currentRoom=(currentRoom+1)%rooms.length;renderRoom()};
     document.getElementById('prevRoom').onclick=()=>{currentRoom=(currentRoom-1+rooms.length)%rooms.length;renderRoom()};
 
@@ -1477,8 +1492,15 @@
     const lightboxTitle=document.getElementById('lightboxTitle');
     const lightboxCounter=document.getElementById('lightboxCounter');
 
+    function getActiveGallery(){
+      if(activeSpace==='room'){
+        const room=rooms[currentRoom];
+        return {title:{id:room.name,en:room.name},photos:room.photos};
+      }
+      return spaceGalleries[activeSpace];
+    }
     function showSpacePhoto(index){
-      const gallery=spaceGalleries[activeSpace];
+      const gallery=getActiveGallery();
       activeSpacePhoto=(index+gallery.photos.length)%gallery.photos.length;
       lightboxImage.src=gallery.photos[activeSpacePhoto];
       lightboxImage.alt=gallery.title[language]+' '+(activeSpacePhoto+1);
@@ -1491,9 +1513,19 @@
       spaceLightbox.classList.add('open');
       document.body.style.overflow='hidden';
     }
+    function openRoomGallery(index){
+      activeSpace='room';
+      activeSpacePhoto=index;
+      showSpacePhoto(index);
+      clearInterval(slideTimer);
+      spaceLightbox.classList.add('open');
+      document.body.style.overflow='hidden';
+    }
     function closeSpaceGallery(){
       spaceLightbox.classList.remove('open');
       document.body.style.overflow='';
+      if(activeSpace==='room') restartSlider();
+      activeSpace=null;
     }
     document.querySelectorAll('.space-card').forEach(card=>card.addEventListener('click',()=>openSpaceGallery(card.dataset.space)));
     document.getElementById('lightboxClose').onclick=closeSpaceGallery;
