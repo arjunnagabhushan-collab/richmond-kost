@@ -778,7 +778,7 @@
     .space-grid{
       display:grid;
       grid-template-columns:1.15fr .82fr .82fr;
-      grid-template-rows:255px 255px 205px;
+      grid-template-rows:255px 255px 205px 255px;
       gap:18px;
     }
     .space-card{position:relative;overflow:hidden;margin:0;cursor:pointer;background:#ddd;border:0;padding:0;text-align:left}
@@ -786,6 +786,7 @@
     .space-card.kitchen{grid-column:2 / 4;grid-row:1}
     .space-card.garden{grid-column:2 / 4;grid-row:2}
     .space-card.parking{grid-column:1 / 4;grid-row:3}
+    .space-card.aviary{grid-column:1 / 4;grid-row:4}
     .space-card img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.02);transition:transform 1.05s cubic-bezier(.2,.7,.2,1),filter .35s ease}
     .space-card:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 42%,rgba(6,24,38,.72));pointer-events:none;transition:background .35s ease}
     .space-card:hover img{transform:scale(1.055)}
@@ -814,11 +815,12 @@
 
     @media(max-width:800px){
       .common-head h2{font-size:48px}
-      .space-grid{grid-template-columns:1fr 1fr;grid-template-rows:360px 220px 220px 190px;gap:12px}
+      .space-grid{grid-template-columns:1fr 1fr;grid-template-rows:360px 220px 220px 190px 220px;gap:12px}
       .space-card.living{grid-column:1 / 3;grid-row:1}
       .space-card.kitchen{grid-column:1 / 3;grid-row:2}
       .space-card.garden{grid-column:1 / 3;grid-row:3}
       .space-card.parking{grid-column:1 / 3;grid-row:4}
+      .space-card.aviary{grid-column:1 / 3;grid-row:5}
       .lightbox-arrow{width:42px;height:52px}.lightbox-prev{left:10px}.lightbox-next{right:10px}
       .space-lightbox-image{max-width:92vw;max-height:72vh}
     }
@@ -1062,6 +1064,12 @@
             <img src="assets/Parking/parking-1.webp" alt="Area parkir dan eksterior Richmond Villa" loading="lazy">
             <span class="space-photo-count">5 PHOTOS</span>
             <span class="space-caption"><strong data-en="Parking & Exterior" data-id="Parkir & Eksterior">Parkir & Eksterior</strong><span data-en="Arrival · Access · Exterior" data-id="Kedatangan · Akses · Eksterior">Kedatangan · Akses · Eksterior</span></span>
+          </button>
+
+          <button class="space-card aviary common-reveal common-delay4" data-space="aviary" aria-label="Open Aviary, Birds and Koi Pond gallery">
+            <img src="assets/Aviary/aviary-1.webp" alt="Aviary, birds and koi pond at Richmond Villa" loading="lazy">
+            <span class="space-photo-count">6 PHOTOS</span>
+            <span class="space-caption"><strong data-en="Aviary, Birds & Koi Pond" data-id="Aviary, Burung & Kolam Koi">Aviary, Burung & Kolam Koi</strong><span data-en="A little nature, right at home" data-id="Nuansa alam di tengah hunian">Nuansa alam di tengah hunian</span></span>
           </button>
         </div>
       </div>
@@ -1632,6 +1640,17 @@
           'assets/Parking/parking-3.webp',
           'assets/Parking/parking-4.webp',
           'assets/Parking/parking-5.webp'
+        ]
+      },
+      aviary:{
+        title:{id:'Aviary, Burung & Kolam Koi',en:'Aviary, Birds & Koi Pond'},
+        photos:[
+          'assets/Aviary/aviary-1.webp',
+          'assets/Aviary/aviary-2.webp',
+          'assets/Aviary/aviary-3.webp',
+          'assets/Aviary/aviary-4.webp',
+          'assets/Aviary/aviary-5.webp',
+          'assets/Aviary/aviary-6.webp'
         ]
       }
     };
